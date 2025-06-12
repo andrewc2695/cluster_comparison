@@ -1,0 +1,15 @@
+type Query {
+    """
+    Retrieves time series data for one or two vehicle populations.
+    @param population1 - Required filter for the first vehicle population
+    @param population2 - Optional filter for the second vehicle population (for comparison)
+    @param visualizationParams - Parameters that define how the data should be visualized
+    @return Array of time series data for the specified populations
+    """
+    getVehiclePopulationTimeSeries(
+        population1: VehiclePopulationFilter!, 
+        population2: VehiclePopulationFilter, 
+        visualizationParams: VisualizationParams!
+    ): VehiclePopulationTimeSeries!
+}
+

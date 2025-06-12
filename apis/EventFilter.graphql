@@ -1,0 +1,65 @@
+"""
+Filter criteria for vehicle events.
+"""
+type EventFilter {
+    """
+    How far back in time to look for events.
+    """
+    numDays: Int!
+    """
+    Filter for fault events
+    """
+    faultEvent: FaultEventFilter
+    """
+    Filter for pattern events
+    """
+    patternEvent: PatternEventFilter
+    """
+    Filter for repair events
+    """
+    repairEvent: RepairEventFilter
+    """
+    Filter for anomaly events
+    """
+    anomalyEvent: AnomalyEventFilter
+}
+
+"""
+Filter criteria for fault events.
+"""
+type FaultEventFilter {
+    """
+    Specific fault code to filter by
+    """
+    faultCode: String!
+}
+
+"""
+Filter criteria for pattern events.
+"""
+type PatternEventFilter {
+    """
+    Specific pattern ID to filter by
+    """
+    patternId: ID!
+}
+
+"""
+Filter criteria for repair events.
+"""
+type RepairEventFilter {
+    """
+    Specific repair type to filter by
+    """
+    repairType: String!
+}
+
+"""
+Filter criteria for anomaly events.
+"""
+type AnomalyEventFilter {
+    """
+    Specific anomaly ID to filter by
+    """
+    anomalyId: ID!
+}

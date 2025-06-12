@@ -1,0 +1,37 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin", "rhel-openssl-1.0.x"]
+  output        = "../src/generated/prisma-client-js"
+}
+
+generator dbml {
+  provider            = "prisma-dbml-generator"
+  outputName          = "pull.dbml"
+  projectName         = "Pull"
+  projectDatabaseType = "PostgreSQL"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(cuid())
+
+  VehiclePopulationFilter VehiclePopulationFilter[]
+}
+
+model VehiclePopulationFilter {
+    id String @id @default(cuid())
+    name String
+    description String
+    creator      User?            @relation(fields: creatorId, references: id)
+    creatorId    String?
+    created      DateTime @default(now())
+    lastModified DateTime @default(now())
+    // See VehiclePopulationFilter.graphql for the structure of the JSON fields
+    vehicleAttributes Json?
+    // See EventFilter.graphql for the structure of the JSON fields
+    events Json?
+}

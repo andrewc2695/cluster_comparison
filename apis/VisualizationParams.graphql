@@ -1,0 +1,94 @@
+"""
+Enum defining the possible independent variables for time series visualization.
+"""
+enum VehiclePopulationTimeSeriesIndependentVariable {
+    time,    # Time-based analysis
+    mileage  # Mileage-based analysis
+}
+
+"""
+Enum defining the possible qualitative variables for grouping vehicle data.
+"""
+enum QualitativeVariable {
+    model,           # Vehicle model
+    modelYear,       # Year of manufacture
+    modelStyle,      # Style/variant of the model
+    deliveryCountry, # Country where the vehicle was delivered
+    batteryType,     # Type of battery installed
+}
+
+"""
+Parameters that define how vehicle population data should be visualized. Exactly one of the parameters must be provided.
+"""
+type VisualizationParams {
+    """
+    Parameters for scatter plot visualization
+    """
+    scatterPlotParams: QuantitativeChartParams
+    """
+    Parameters for line chart visualization
+    """
+    lineChartParams: QuantitativeChartParams
+    """
+    Parameters for bar chart visualization
+    """
+    barChartParams: QualitativeChartParams
+    """
+    Parameters for histogram visualization
+    """
+    histogramParams: QuantitativeChartParams
+    """
+    Parameters for box plot visualization
+    """
+    boxPlotParams: QualitativeChartParams
+    """
+    Parameters for matrix visualization
+    """
+    matrixParams: MatrixParams
+}
+
+"""
+Parameters for charts that use quantitative (numeric) variables.
+"""
+type QuantitativeChartParams {
+    """
+    The independent variable to use for the x-axis
+    """
+    independentVariable: VehiclePopulationTimeSeriesIndependentVariable!
+    """
+    The field ID to use for the time series data
+    """
+    timeSeriesFieldId: TimeSeriesFieldId!
+}
+
+"""
+Parameters for charts that use qualitative (categorical) variables.
+"""
+type QualitativeChartParams {
+    """
+    Array of group names to include in the visualization
+    """
+    groups: [String!]!
+    """
+    The field ID to use for the time series data
+    """
+    timeSeriesFieldId: TimeSeriesFieldId!
+    """
+    The qualitative variable to use for grouping
+    """
+    independentVariable: QualitativeVariable!
+}
+
+"""
+Parameters for matrix visualization combining qualitative and quantitative data. Exactly one of the parameters must be provided.
+"""
+type MatrixParams {
+    """
+    Parameters for qualitative aspects of the matrix
+    """
+    qualitativeParams: QualitativeChartParams
+    """
+    Parameters for quantitative aspects of the matrix
+    """
+    quantitativeParams: QuantitativeChartParams
+}

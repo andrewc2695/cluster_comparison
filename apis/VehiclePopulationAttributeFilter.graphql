@@ -1,0 +1,38 @@
+"""
+Filter criteria for selecting a specific vehicle population. If an attribute is not provided, all values for that attribute will be included. 
+A vehicle must match one of the provided attributes for each provided attribute group.
+"""
+type VehiclePopulationFilter {
+    """
+    Array of vehicle model names to include
+    """
+    model: [String!]!
+    """
+    Array of model years to include
+    """
+    modelYear: [Int!]
+    """
+    Array of model styles/variants to include
+    """
+    modelStyle: [String!]
+    """
+    Array of delivery countries to include
+    """
+    deliveryCountry: [String!]
+    """
+    Array of battery type IDs to include
+    """
+    batteryType: [Int!]
+    """
+    Array of software versions to include
+    """
+    softwareVersion: [String!]
+    """
+    Optional cluster ID to filter by
+    """
+    clusterID: ID
+    """
+    Array of event filters to apply
+    """
+    event: [EventFilter!]
+}

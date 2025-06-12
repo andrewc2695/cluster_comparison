@@ -1,0 +1,132 @@
+type VehiclePopulationTimeSeries {
+    scatterPlot: VehiclePopulationScatterPlotTimeSeries
+    lineChart: VehiclePopulationLineChartTimeSeries
+    barChart: VehiclePopulationBarChartTimeSeries
+    histogram: VehiclePopulationHistogramTimeSeries 
+    boxPlot: VehiclePopulationBoxPlotTimeSeries
+    matrix: VehiclePopulationMatrixTimeSeries
+}
+
+type VehiclePopulationAggregateValues {
+  """
+  An array of arrays containing the median of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  median: [[Float]!]!
+  """
+  An array of arrays containing the mean of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  mean: [[Float]!]!
+  """
+  An array of arrays containing the min of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  min: [[Float]!]!
+  """
+  An array of arrays containing the max of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  max: [[Float]!]!
+  """
+  An array of arrays containing the 25th percentile of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  bottomQuartile: [[Float]!]!
+  """
+  An array of arrays containing the 75th percentile of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  topQuartile: [[Float]!]!
+  """
+  An array of arrays containing the 5th percentile of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  bottom5Perc: [[Float]!]!
+  """
+  An array of arrays containing the 95th percentile of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  top5Perc: [[Float]!]!
+  """
+  An array of arrays containing the stddev of the requested field values.
+  The first array contains values for population 1, the second array for population 2.
+  """
+  stddev: [[Float]!]!
+}
+
+type VehiclePopulationLineChartTimeSeries {
+    """
+    The series of independent variable values.
+    """
+    x: [Float!]!
+    """
+    The aggregate values of the dependent variable at a specific independent variable range.
+    """
+    vehiclePopulationAggregateValues: VehiclePopulationAggregateValues!
+    """
+    The aggregation interval applied. This is needed if the server calculates a default value.
+    """
+    independentVarInterval: Interval  
+}
+
+type VehiclePopulationScatterPlotTimeSeries {
+    """
+    An array of arrays containing the x and y values of the scatter plot.
+    The first array contains values for population 1, the second array for population 2.
+    """
+    values: [[VehiclePopulationScatterPlotTimeSeriesValues]!]!
+}
+
+type VehiclePopulationScatterPlotTimeSeriesValues { x: Float!, y: Float!}
+
+type VehiclePopulationBarChartTimeSeries {
+    xAxis: [String!]!
+    """
+    The aggregate values of the dependent variable for a specific group.
+    """
+    vehiclePopulationAggregateValues: VehiclePopulationAggregateValues!
+}
+
+type VehiclePopulationHistogramTimeSeries {
+    xAxis: [Float!]!
+    """
+    The aggregate values of the dependent variable for a specific dependent variable range.
+    """
+    vehiclePopulationAggregateValues: VehiclePopulationAggregateValues!
+}
+
+type VehiclePopulationBoxPlotTimeSeries {
+    """
+    An array of arrays containing 5th percentile values.
+    The first array contains values for population 1, the second array for population 2.
+    """
+    p5: [[Float]!]!
+    """
+    An array of arrays containing 25th percentile values.
+    The first array contains values for population 1, the second array for population 2.
+    """
+    p25: [[Float]!]!
+    """
+    An array of arrays containing median values.
+    The first array contains values for population 1, the second array for population 2.
+    """
+    median: [[Float]!]!
+    """
+    An array of arrays containing 75th percentile values.
+    The first array contains values for population 1, the second array for population 2.
+    """
+    p75: [[Float]!]!
+    """
+    An array of arrays containing 95th percentile values.
+    The first array contains values for population 1, the second array for population 2.
+    """
+    p95: [[Float]!]!
+}
+
+type VehiclePopulationMatrixTimeSeries {
+    """
+    An array of arrays containing matrix values.
+    """
+    values: [[Float]!]!
+}
